@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_practice/SearchDatamodel.dart';
 import 'package:flutter_practice/details_populated_screen.dart';
 import 'package:http/http.dart' as http;
@@ -14,28 +15,32 @@ class SearchScreen extends StatefulWidget {
 
 class _SearchScreenState extends State<SearchScreen> {
   List<SearchDatamodel> users;
-  String text = 'text';
+  String textapi = 'text';
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomPadding: false,
       appBar: AppBar(
         title: Text("Hacker News"),
       ),
       body: Center(
         child: Column(
           children: [
-            TextField(
-              decoration: InputDecoration(
-                  border: InputBorder.none, hintText: 'Enter a search term'),
-              onChanged: (text) {
-                setState(() {
-                  text = text;
-
-                });
-              },
+            Container(
+              padding: EdgeInsets.only(left: 16.0, right: 16.0),
+              child: TextField(
+                decoration: InputDecoration(
+                    border: InputBorder.none, hintText: 'Enter a search term'),
+                onChanged: (text) {
+                  setState(() {
+                    this.textapi = text;
+                    listwidget(textapi);
+                  });
+                },
+              ),
             ),
-            listwidget(text)
+            listwidget(textapi)
           ],
         ),
       ),
@@ -85,13 +90,11 @@ class _SearchScreenState extends State<SearchScreen> {
       print(singleUser['title']);
       SearchDatamodel data = new SearchDatamodel.searchscreen(
           singleUser['objectID'], singleUser['title'], singleUser['points']);
-      if (singleUser['title']!=null) {
+      if (singleUser['title'] != null) {
         users.add(data);
       }
     }
     print(users.length);
     return users;
   }
-
-
 }
