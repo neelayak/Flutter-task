@@ -60,8 +60,11 @@ class _SearchScreenState extends State<SearchScreen> {
           } else {
             return SizedBox(
               height: MediaQuery.of(context).size.height * .80,
-              child: ListView.builder(
+              child: ListView.separated(
                 itemCount: snap.data.length,
+                separatorBuilder: (context, index) {
+                  return Divider();
+                },
                 itemBuilder: (ctx, index) => ListTile(
                   title: Text(snap.data[index].title ?? 'null'),
                   onTap: () {
