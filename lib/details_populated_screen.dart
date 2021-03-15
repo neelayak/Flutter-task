@@ -75,6 +75,7 @@ class _DetailsPopulatedScreenState extends State<DetailsPopulatedScreen> {
       SearchDatamodel data = new SearchDatamodel.populate(singleUser['text']);
       print(singleUser['text']);
       users.add(data);
+
     }
     print(users.length);
     return users;
