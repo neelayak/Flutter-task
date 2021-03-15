@@ -69,6 +69,7 @@ class _DetailsPopulatedScreenState extends State<DetailsPopulatedScreen> {
     String url = "http://hn.algolia.com/api/v1/items/${objectID}";
     var response = await http.get(url);
     var responseData = json.decode(response.body);
+
     print(responseData);
     List<SearchDatamodel> users = [];
     for (var singleUser in responseData['children']) {
