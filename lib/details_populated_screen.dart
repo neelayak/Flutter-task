@@ -28,7 +28,6 @@ class _DetailsPopulatedScreenState extends State<DetailsPopulatedScreen> {
       ),
       body: Column(
         children: [
-
           Text(
             'Points :${points}',
             style: TextStyle(fontSize: 20.0),
@@ -47,8 +46,10 @@ class _DetailsPopulatedScreenState extends State<DetailsPopulatedScreen> {
                     height: MediaQuery.of(context).size.height * .80,
                     child: ListView.builder(
                       itemCount: snap.data.length,
-                      itemBuilder: (ctx, index) =>
-                          ListTile(title: Text(snap.data[index].text)),
+                      itemBuilder: (ctx, index) => ListTile(
+                          title: Text(
+                        snap.data[index].text,maxLines: 2,
+                      )),
                     ),
                   );
                 }
@@ -75,8 +76,9 @@ class _DetailsPopulatedScreenState extends State<DetailsPopulatedScreen> {
     for (var singleUser in responseData['children']) {
       SearchDatamodel data = new SearchDatamodel.populate(singleUser['text']);
       print(singleUser['text']);
-      users.add(data);
-
+      if (singleUser['text'] != null) {
+        users.add(data);
+      }
     }
     print(users.length);
     return users;
